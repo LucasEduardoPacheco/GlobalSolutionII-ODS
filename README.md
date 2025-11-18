@@ -58,3 +58,26 @@ O projeto é dividido em um fluxo de navegação claro:
 home.html / home.css: Tela Inicial (Splash Screen) com a logo e o botão de Iniciar.
 
 index.html / style.css / script.js: O núcleo do jogo (Game UI Hexagonal e Lógica).
+Como Executar Localmente
+
+Clone o repositório:
+
+git clone [https://github.com/seu-usuario/gaia-flow-reskilling-architect.git](https://github.com/seu-usuario/gaia-flow-reskilling-architect.git)
+
+
+Navegue até a pasta:
+
+cd gaia-flow-reskilling-architect
+
+
+Abra o arquivo home.html no seu navegador (Chrome, Firefox, etc.).
+
+# Alternativamente, use um servidor local simples:
+python3 -m http.server 8000
+
+
+🖼️ Estilo Visual: Cyberpunk Consciente
+
+Adotamos uma paleta de cores Neon (Violeta, Ciano, Verde) sobre fundos escuros para evocar alta tecnologia, mas com o uso estratégico do Verde (\texttt{Health Pod} / \texttt{Energy Safe}) para manter o foco na Bio-Ética e Sustentabilidade.
+
+Este projeto foi desenvolvido como uma solução de inovação para o futuro do trabalho.
