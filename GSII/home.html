@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<body>
+    <link rel="stylesheet" href="css/style.css">
+<!-- TELA INICIAL (SPLASH SCREEN) -->
+    <div id="splash-screen" class="hidden">
+        <!-- Logo Estilizada (Simulação da Imagem) -->
+        <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <style>
+                .leaf-fill { fill: url(#paint0_linear); }
+                .hex-stroke { stroke: url(#paint1_linear); }
+            </style>
+            <defs>
+                <linearGradient id="paint0_linear" x1="125" y1="20" x2="125" y2="230" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#A73FFF"/>
+                    <stop offset="1" stop-color="#00C8F5"/>
+                </linearGradient>
+                <linearGradient id="paint1_linear" x1="125" y1="20" x2="125" y2="230" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#00C8F5"/>
+                    <stop offset="1" stop-color="#6366f1"/>
+                </linearGradient>
+            </defs>
+            <!-- Hexágono Externo (Estrutura Arquitetônica) -->
+            <path d="M125 18L215 63V152L125 197L35 152V63L125 18Z" stroke-width="4" class="hex-stroke" stroke-linejoin="round"/>
+            <!-- Folha Bio-Ética (Design simplificado da folha) -->
+            <path d="M125 35C150 35 175 60 175 100C175 140 125 170 125 215C125 170 75 140 75 100C75 60 100 35 125 35Z" class="leaf-fill" fill-opacity="0.8"/>
+            <!-- Veios/Circuito (Para dar toque de dados) -->
+            <path d="M125 50V200M125 125L160 100M125 125L90 100" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+        </svg>
+
+        <h2 class="splash-logo-text font-bold">GAIA FLOW</h2>
+        <p class="text-xl text-gray-400 font-inter">THE RESKILLING ARCHITECT</p>
+        
+        <a href="index.html">
+        <button class="start-button rounded-xl text-white font-orbitron">
+            INICIAR MISSÃO
+        </button>
+        </a>
+</body>
+</head>
+</html>

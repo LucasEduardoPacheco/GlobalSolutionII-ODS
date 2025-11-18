@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaia Flow: The Reskilling Architect (Manual)</title>
+    <!-- Inclui o Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importa o nosso CSS customizado -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#0d0617] text-[#d1d5db] min-h-screen flex justify-center items-center p-8">
+
+
+    <div class="container p-8 rounded-2xl bg-[#1a0f2b] border-2 border-[#6366f1] shadow-lg max-w-7xl w-full">
+        <!-- CONTEÚDO DO JOGO (Inicialmente Oculto) -->
+    <div class="container p-8 rounded-2xl bg-[#1a0f2b] border-2 border-[#6366f1] shadow-lg max-w-7xl w-full">
+        <!-- HEADER e TÍTULO -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-extrabold mb-2 title-glow">
+                GAIA FLOW: THE RESKILLING ARCHITECT
+            </h1>
+            <p class="text-lg text-gray-400">FASE 1: BIO-ÉTICO AUDITOR DE ALGORITMOS (BEAA)</p>
+        </header>
+
+        <!-- DASHBOARD (MÉTRICAS CHAVE) -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 font-orbitron text-center">
+            <div class="p-3 border border-purple-500 rounded-lg bg-gray-900/30">
+                <p class="text-sm text-gray-400">DIAS DECORRIDOS</p>
+                <p id="days-count" class="text-3xl text-purple-400 mt-1">0</p>
+            </div>
+            <div class="p-3 border border-purple-500 rounded-lg bg-gray-900/30">
+                <p class="text-sm text-gray-400">CO-PILOT STATUS</p>
+                <p id="copilot-status" class="text-3xl text-gray-500 mt-1">INATIVO</p>
+            </div>
+            <div class="p-3 border border-purple-500 rounded-lg bg-gray-900/30">
+                <p class="text-sm text-gray-400">BOOSTER (CARGAS)</p>
+                <p id="booster-count" class="text-3xl text-yellow-400 mt-1">0</p>
+            </div>
+            <div class="p-3 border border-purple-500 rounded-lg bg-gray-900/30">
+                <p class="text-sm text-gray-400">SHIFT AMBIENTAL</p>
+                <p id="shift-status" class="text-xl font-bold mt-1 text-green-400">Estabilidade</p>
+            </div>
+        </div>
+
+        <!-- ALERTA DE STATUS (Corrigido o ID) -->
+        <div class="bg-[#1e1431] p-4 rounded-lg border border-purple-500 mb-8">
+            <p class="text-sm text-gray-400 font-orbitron text-center">ALERTA DE FATOR HUMANO (Nômade 404)</p>
+            <p id="status-text" class="text-xl font-bold mt-1 text-green-400 text-center">🟢 ESTADO ESTÁVEL: Otimizar Fluxo!</p>
+        </div>
+
+
+        <!-- BARRAS DE PROGRESSO (Central) -->
+        <div class="space-y-4 mb-12">
+            <div class="text-center font-bold text-lg">COMPETÊNCIA BEAA (<span id="skill-value">0.0</span>%)</div>
+            <div class="w-full h-4 bg-gray-700 rounded-full overflow-hidden">
+                <div id="skill-bar" class="progress-bar h-full rounded-full skill-bar transition-all duration-500" style="width: 0%;"></div>
+            </div>
+            
+            <div class="text-center font-bold text-lg">BEM-ESTAR (ENERGIA COGNITIVA) (<span id="energy-value">100.0</span>%)</div>
+            <div class="w-full h-4 bg-gray-700 rounded-full overflow-hidden">
+                <div id="energy-bar" class="progress-bar h-full rounded-full energy-bar-safe transition-all duration-500" style="width: 100%;"></div>
+            </div>
+        </div>
+
+        <!-- MÓDULOS DE AÇÃO (Layout Hexagonal) -->
+        <div class="module-area mb-12">
+            
+            <!-- Hexágono 1: VR HARD -->
+            <div class="hex-button-wrapper hex-offset-top">
+                <button onclick="performAction('VR_HARD')" class="hex-button hex-vr">
+                     <span class="text-4xl text-blue-400 mb-1">⚡</span>
+                    <span class="font-bold text-base uppercase">VR LAB (HARD SKILLS)</span>
+                    <span class="text-xs text-gray-400">Alto Risco/Retorno</span>
+                </button>
+            </div>
+
+            <!-- Hexágono 2: SOFT SKILLS -->
+             <div class="hex-button-wrapper hex-offset-center">
+                <button onclick="performAction('VR_SOFT')" class="hex-button hex-soft">
+                    <span class="text-4xl text-fuchsia-400 mb-1">🧠</span>
+                    <span class="font-bold text-base uppercase">SOFT SKILLS</span>
+                    <span class="text-xs text-gray-400">Custo Sustentável</span>
+                </button>
+            </div>
+            
+            <!-- Hexágono 3: HEALTH POD -->
+            <div class="hex-button-wrapper hex-offset-top">
+                <button id="health-pod-btn" onclick="performAction('HEALTH_POD')" class="hex-button hex-health">
+                    <span class="text-4xl text-green-400 mb-1">🧘</span>
+                    <span class="font-bold text-base uppercase">HEALTH POD</span>
+                    <span class="text-xs text-gray-400">Recuperação Crítica</span>
+                </button>
+            </div>
+
+            <!-- Hexágono 4: COMPRAR/CALIBRAR CO-PILOT -->
+            <div class="hex-button-wrapper hex-offset-center">
+                <button id="copilot-calib-btn" onclick="performAction('AI_CALIB')" class="hex-button hex-copilot hidden">
+                    <span class="text-4xl text-purple-400 mb-1">🤖</span>
+                    <span class="font-bold text-base uppercase">AI CO-PILOT CALIBRAÇÃO</span>
+                    <span class="text-xs text-gray-400">Manutenção Ética</span>
+                </button>
+                <button id="copilot-buy-btn" onclick="document.getElementById('copilot-buy-modal').classList.remove('hidden')" class="hex-button hex-copilot">
+                     <span class="text-4xl text-indigo-400 mb-1">💾</span>
+                    <span class="font-bold text-base uppercase">COMPRAR CO-PILOT</span>
+                    <span class="text-xs text-gray-400">Upgrade de Eficiência</span>
+                </button>
+            </div>
+            
+            <!-- Hexágono 5: MAQ PUZZLE -->
+            <div class="hex-button-wrapper hex-offset-top">
+                <button id="maq-btn" onclick="performAction('MAQ_PUZZLE')" class="hex-button hex-maq">
+                     <span class="text-4xl text-yellow-400 mb-1">🧩</span>
+                    <span class="font-bold text-base uppercase">MAQ PUZZLE</span>
+                    <span class="text-xs text-gray-400">Bônus de Fluxo (Resolver)</span>
+                </button>
+            </div>
+            
+            <!-- Hexágono 6: ODS PROJECT -->
+            <div class="hex-button-wrapper hex-offset-center">
+                <button onclick="checkODSProjectTime() ? openODSProjectModal() : logMessage('Projeto ODS não obrigatório neste ciclo.', 'warn');" class="hex-button hex-health">
+                    <span class="text-4xl text-indigo-400 mb-1">🌍</span>
+                    <span class="font-bold text-base uppercase">ODS PROJECT BOARD</span>
+                    <span class="text-xs text-gray-400">Impacto e Propósito</span>
+                </button>
+            </div>
+            
+        </div>
+
+        <!-- LOG DE EVENTOS -->
+        <div class="log-container mx-auto max-w-2xl mt-12">
+            <h2 class="text-xl font-bold text-fuchsia-400 font-orbitron mb-2">LOG DE EVENTOS</h2>
+            <div id="log-console" class="console rounded-lg">
+                <!-- Logs serão inseridos aqui via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals (Ocultos por padrão) -->
+    <!-- Modal do Puzzle (MAQ) -->
+    <div id="puzzle-modal" class="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center p-4 hidden z-50 backdrop-blur-sm">
+        <div class="puzzle-modal-content p-8 rounded-2xl w-full max-w-xl text-center">
+            <h2 class="text-3xl font-bold title-glow text-yellow-400 mb-4 font-orbitron">MATRIZ DE ALINHAMENTO QUÂNTICO (MAQ)</h2>
+            <p class="text-lg mb-6 text-gray-300">
+                **Desafio Ético: Lights Out.** Todos os 9 nós da matriz devem estar 'ON'. Clicar em um nó reverte seu estado e o estado de seus vizinhos adjacentes.
+            </p>
+            <div id="puzzle-grid" class="puzzle-grid grid grid-cols-3 gap-3 justify-items-center mx-auto mb-8 w-64 sm:w-80">
+                <!-- Buttons will be rendered here -->
+            </div>
+            <button onclick="document.getElementById('puzzle-modal').classList.add('hidden');" class="mt-4 px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg font-bold transition duration-200">CANCELAR E VOLTAR</button>
+        </div>
+    </div>
+    
+    <!-- Modal de Compra do AI Co-Pilot -->
+    <div id="copilot-buy-modal" class="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center p-4 hidden z-50 backdrop-blur-sm">
+        <div class="puzzle-modal-content p-8 rounded-2xl w-full max-w-lg text-center border-indigo-500 shadow-indigo-500/50">
+            <h2 class="text-3xl font-bold title-glow text-indigo-400 mb-4 font-orbitron">INSTALAR AI CO-PILOT</h2>
+            <p class="text-lg mb-6 text-gray-300">
+                O Co-Pilot aumenta a eficiência cognitiva em 10% (reduzindo o custo de Energia), mas requer um investimento inicial de alinhamento.
+            </p>
+            <p class="text-2xl font-bold text-red-400 mb-6">CUSTO: -30% HABILIDADE BEAA</p>
+            <button onclick="activateAICoPilot()" class="mt-4 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-bold transition duration-200 mr-4">CONFIRMAR INSTALAÇÃO</button>
+            <button onclick="document.getElementById('copilot-buy-modal').classList.add('hidden')" class="mt-4 px-6 py-3 bg-gray-600 hover:bg-gray-700 rounded-lg font-bold transition duration-200">CANCELAR</button>
+        </div>
+    </div>
+    
+    <!-- Modal do ODS Project Board -->
+    <div id="ods-modal" class="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center p-4 hidden z-50 backdrop-blur-sm">
+        <div class="puzzle-modal-content p-8 rounded-2xl w-full max-w-xl text-center border-green-500 shadow-green-500/50">
+            <h2 class="text-3xl font-bold title-glow text-green-400 mb-4 font-orbitron">PROJETO ODS (IMPACTO SOCIAL)</h2>
+            <p class="text-lg mb-6 text-gray-300">
+                A Matriz Gaia exige que o Nômade se engaje em um projeto de impacto a cada 10 dias. Alto risco de Sobrecarga, mas alta recompensa de Habilidade.
+            </p>
+            <div class="bg-[#1e1431] p-4 rounded-lg mb-6">
+                <p class="text-2xl font-bold text-blue-300">Auditoria de Viés em Recrutamento Justo</p>
+                <p class="text-sm text-gray-400 mt-2">Duração: +5 Dias | Custo: -10 Energia</p>
+                <p class="text-sm text-green-400">Recompensa: +10% Habilidade | Risco: 50% Sobrecarga de Energia</p>
+            </div>
+            <button onclick="selectODSProject('Auditoria de Viés')" class="mt-4 px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-bold transition duration-200">INICIAR PROJETO ODS 10</button>
+        </div>
+    </div>
+
+    <!-- Mensagem de Fim de Jogo -->
+    <div id="message-box" class="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center p-4 hidden z-50 backdrop-blur-sm">
+        <div class="bg-[#1a0f2b] p-10 rounded-2xl shadow-neon border-4 border-fuchsia-500 w-full max-w-xl text-center">
+            <!-- Conteúdo inserido pelo JS -->
+        </div>
+    </div>
+
+    <!-- Importa o nosso JavaScript de lógica -->
+    <script src="js/script.js"></script>
+</body>
+</html>
+
